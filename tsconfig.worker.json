@@ -15,7 +15,7 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "noEmit": false,
-    "isolatedModules": true
+    "isolatedModules": false
   },
   "include": [
     "src/*.worker.ts",

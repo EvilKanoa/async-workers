@@ -1,3 +1,28 @@
+# Simple demo of using workers including CRA build configuration
+
+### Key things to include compilation for workers with TypeScript
+- Need to use `react-app-rewired`.
+- Create a second tsconfig for workers with `noEmit=false` and DOM related libs removed.
+- Add a webpack module rule for workers:
+  - First loader should be `worker-loader`
+  - Second loader should be `ts-loader` with options set to point it to `tsconfig.worker.json` (or whatever you named it.)
+- Create a `worker-loader.d.ts` file with the below contents:
+
+```ts
+declare module "*.worker.ts" {
+  // You need to change `Worker`, if you specified a different value for the `workerType` option
+  class WebpackWorker extends Worker {
+    constructor();
+  }
+
+  // Uncomment this if you set the `esModule` option to `false`
+  // export = WebpackWorker;
+  export default WebpackWorker;
+}
+```
+
+
+# CRA Readme
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
